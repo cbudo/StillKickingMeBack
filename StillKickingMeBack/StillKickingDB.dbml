@@ -4,8 +4,9 @@
     <Type Name="Caregiver">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Email" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="ContactType_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Patient_Medication_rel" Member="Patient_Medication_rels">
@@ -13,9 +14,18 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="User_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Medication_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Dosage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="TimeCode" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="to_take" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="time_to_take" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="week_repeat_code" Type="System.String" DbType="NVarChar(7)" CanBeNull="true" />
+      <Column Name="start_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="severity" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ContactType" Member="ContactTypes">
+    <Type Name="ContactType">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Type" Type="System.String" DbType="NChar(150)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.EmergencyContact" Member="EmergencyContacts">
@@ -25,6 +35,13 @@
       <Column Name="Phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
       <Column Name="Email" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.[Medical Condition]" Member="Medical_Conditions">
+    <Type Name="Medical_Condition">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Patient_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.MedicalInfo" Member="MedicalInfos">
@@ -40,12 +57,12 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="UserIDFK" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="DateStarted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="DateStopped" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="Prescriber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="Refillable" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="pills_to_take" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="eat_with_food" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="dosage_mg" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="repeat_hours" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="repeat_start" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
   <Table Name="dbo.Patient" Member="Patients">
@@ -54,7 +71,8 @@
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="Email" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
       <Column Name="Password" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Column Name="Phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="Sex" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="DOB" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Patient_Caregiver_rel" Member="Patient_Caregiver_rels">
