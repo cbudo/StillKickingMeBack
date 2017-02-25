@@ -16,22 +16,22 @@ namespace StillKickingMeBack.Controllers
         // GET: api/Patient/example@example.com
         [HttpGet]
         [Route("{patientId:int}")]
-        public string getPatient(int patientId)
+        public Patient getPatient(int patientId)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
             var db = new StillKickingDBDataContext();
             var patient = db.Patients.Where(p => p.Id == patientId).First();
             if (patient == null)
             {
-                return js.Serialize(null);
+                return null;
             }
-            return js.Serialize(patient);
+            return patient;
         }
 
         // POST: api/patient/register
         [HttpPost]
         [Route("register")]
-        public string Create(PatientModel patient)
+        public Patient Create(PatientModel patient)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
             var db = new StillKickingDBDataContext();
@@ -42,7 +42,7 @@ namespace StillKickingMeBack.Controllers
             a.Phone = patient.Phone;
             db.Patients.InsertOnSubmit(a);
             db.SubmitChanges();
-            return js.Serialize(a);
+            return a;
         }
 
         private string GetHashedString(string _PW)
