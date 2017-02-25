@@ -39,6 +39,8 @@ namespace StillKickingMeBack.Controllers
             a.Email = patient.Email;
             a.Name = patient.Name;
             a.Password = GetHashedString(patient.Password);
+            a.Sex = patient.Sex;
+            a.Dob = patient.Dob;
             db.Patients.InsertOnSubmit(a);
             db.SubmitChanges();
             return js.Serialize(a);
