@@ -65,4 +65,11 @@
       <Column Name="DOB" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
     </Type>
   </Table>
+  <Table Name="dbo.[Medical Condition]" Member="Medical_Conditions">
+    <Type Name="Medical_Condition">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Patient_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
 </Database>
