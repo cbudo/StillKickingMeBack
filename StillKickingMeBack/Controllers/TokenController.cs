@@ -13,10 +13,6 @@ namespace StillKickingMeBack.Controllers
         [HttpPost]
         public string GetToken(UserModel user)
         {
-            if (CheckUser(user.username, user.password))
-            {
-                return JwtManager.GenerateToken();
-            }
             return null;
         }
 
