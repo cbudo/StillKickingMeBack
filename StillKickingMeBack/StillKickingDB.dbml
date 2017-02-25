@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="StillKickingMe_db" Class="StillKickingDBDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=boilermake.database.windows.net;Initial Catalog=StillKickingMe_db;User ID=Boilermake" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="StillKickingMe_dbConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Caregiver" Member="Caregivers">
+    <Type Name="Caregiver">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Patient_Medication_rel" Member="Patient_Medication_rels">
+    <Type Name="Patient_Medication_rel">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="User_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Medication_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Dosage" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="TimeCode" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EmergencyContact" Member="EmergencyContacts">
+    <Type Name="EmergencyContact">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.MedicalInfo" Member="MedicalInfos">
+    <Type Name="MedicalInfo">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="DoctorName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="History" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Details" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Medication" Member="Medications">
+    <Type Name="Medication">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserIDFK" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="DateStarted" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="DateStopped" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="Prescriber" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Refillable" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Patient" Member="Patients">
+    <Type Name="Patient">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="Password" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="NVarChar(15)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Patient_Caregiver_rel" Member="Patient_Caregiver_rels">
+    <Type Name="Patient_Caregiver_rel">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Caregiver_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Patient_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </Type>
+  </Table>
+</Database>
