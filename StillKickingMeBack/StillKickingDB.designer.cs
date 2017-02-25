@@ -36,24 +36,33 @@ namespace StillKickingMeBack
     partial void InsertPatient_Medication_rel(Patient_Medication_rel instance);
     partial void UpdatePatient_Medication_rel(Patient_Medication_rel instance);
     partial void DeletePatient_Medication_rel(Patient_Medication_rel instance);
+    partial void InsertContactType(ContactType instance);
+    partial void UpdateContactType(ContactType instance);
+    partial void DeleteContactType(ContactType instance);
     partial void InsertEmergencyContact(EmergencyContact instance);
     partial void UpdateEmergencyContact(EmergencyContact instance);
     partial void DeleteEmergencyContact(EmergencyContact instance);
+    partial void InsertEvent(Event instance);
+    partial void UpdateEvent(Event instance);
+    partial void DeleteEvent(Event instance);
+    partial void InsertEvent_Type(Event_Type instance);
+    partial void UpdateEvent_Type(Event_Type instance);
+    partial void DeleteEvent_Type(Event_Type instance);
+    partial void InsertMedical_Condition(Medical_Condition instance);
+    partial void UpdateMedical_Condition(Medical_Condition instance);
+    partial void DeleteMedical_Condition(Medical_Condition instance);
     partial void InsertMedicalInfo(MedicalInfo instance);
     partial void UpdateMedicalInfo(MedicalInfo instance);
     partial void DeleteMedicalInfo(MedicalInfo instance);
     partial void InsertMedication(Medication instance);
     partial void UpdateMedication(Medication instance);
     partial void DeleteMedication(Medication instance);
-    partial void InsertPatient_Caregiver_rel(Patient_Caregiver_rel instance);
-    partial void UpdatePatient_Caregiver_rel(Patient_Caregiver_rel instance);
-    partial void DeletePatient_Caregiver_rel(Patient_Caregiver_rel instance);
     partial void InsertPatient(Patient instance);
     partial void UpdatePatient(Patient instance);
     partial void DeletePatient(Patient instance);
-    partial void InsertMedical_Condition(Medical_Condition instance);
-    partial void UpdateMedical_Condition(Medical_Condition instance);
-    partial void DeleteMedical_Condition(Medical_Condition instance);
+    partial void InsertPatient_Caregiver_rel(Patient_Caregiver_rel instance);
+    partial void UpdatePatient_Caregiver_rel(Patient_Caregiver_rel instance);
+    partial void DeletePatient_Caregiver_rel(Patient_Caregiver_rel instance);
     #endregion
 		
 		public StillKickingDBDataContext() : 
@@ -102,11 +111,43 @@ namespace StillKickingMeBack
 			}
 		}
 		
+		public System.Data.Linq.Table<ContactType> ContactTypes
+		{
+			get
+			{
+				return this.GetTable<ContactType>();
+			}
+		}
+		
 		public System.Data.Linq.Table<EmergencyContact> EmergencyContacts
 		{
 			get
 			{
 				return this.GetTable<EmergencyContact>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Event> Events
+		{
+			get
+			{
+				return this.GetTable<Event>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Event_Type> Event_Types
+		{
+			get
+			{
+				return this.GetTable<Event_Type>();
+			}
+		}
+		
+		public System.Data.Linq.Table<Medical_Condition> Medical_Conditions
+		{
+			get
+			{
+				return this.GetTable<Medical_Condition>();
 			}
 		}
 		
@@ -126,14 +167,6 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		public System.Data.Linq.Table<Patient_Caregiver_rel> Patient_Caregiver_rels
-		{
-			get
-			{
-				return this.GetTable<Patient_Caregiver_rel>();
-			}
-		}
-		
 		public System.Data.Linq.Table<Patient> Patients
 		{
 			get
@@ -142,11 +175,11 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		public System.Data.Linq.Table<Medical_Condition> Medical_Conditions
+		public System.Data.Linq.Table<Patient_Caregiver_rel> Patient_Caregiver_rels
 		{
 			get
 			{
-				return this.GetTable<Medical_Condition>();
+				return this.GetTable<Patient_Caregiver_rel>();
 			}
 		}
 	}
@@ -161,9 +194,11 @@ namespace StillKickingMeBack
 		
 		private string _Name;
 		
-		private string _Email;
-		
 		private string _Phone;
+		
+		private string _Notes;
+		
+		private System.Nullable<int> _ContactType_IDFK;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -173,10 +208,12 @@ namespace StillKickingMeBack
     partial void OnIdChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
-    partial void OnEmailChanging(string value);
-    partial void OnEmailChanged();
     partial void OnPhoneChanging(string value);
     partial void OnPhoneChanged();
+    partial void OnNotesChanging(string value);
+    partial void OnNotesChanged();
+    partial void OnContactType_IDFKChanging(System.Nullable<int> value);
+    partial void OnContactType_IDFKChanged();
     #endregion
 		
 		public Caregiver()
@@ -224,26 +261,6 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Email", DbType="NVarChar(255)")]
-		public string Email
-		{
-			get
-			{
-				return this._Email;
-			}
-			set
-			{
-				if ((this._Email != value))
-				{
-					this.OnEmailChanging(value);
-					this.SendPropertyChanging();
-					this._Email = value;
-					this.SendPropertyChanged("Email");
-					this.OnEmailChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Phone", DbType="NVarChar(15)")]
 		public string Phone
 		{
@@ -260,6 +277,46 @@ namespace StillKickingMeBack
 					this._Phone = value;
 					this.SendPropertyChanged("Phone");
 					this.OnPhoneChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Notes", DbType="NVarChar(MAX)")]
+		public string Notes
+		{
+			get
+			{
+				return this._Notes;
+			}
+			set
+			{
+				if ((this._Notes != value))
+				{
+					this.OnNotesChanging(value);
+					this.SendPropertyChanging();
+					this._Notes = value;
+					this.SendPropertyChanged("Notes");
+					this.OnNotesChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactType_IDFK", DbType="Int")]
+		public System.Nullable<int> ContactType_IDFK
+		{
+			get
+			{
+				return this._ContactType_IDFK;
+			}
+			set
+			{
+				if ((this._ContactType_IDFK != value))
+				{
+					this.OnContactType_IDFKChanging(value);
+					this.SendPropertyChanging();
+					this._ContactType_IDFK = value;
+					this.SendPropertyChanged("ContactType_IDFK");
+					this.OnContactType_IDFKChanged();
 				}
 			}
 		}
@@ -297,11 +354,17 @@ namespace StillKickingMeBack
 		
 		private System.Nullable<int> _Medication_IDFK;
 		
-		private string _Dosage;
+		private int _to_take;
 		
-		private System.Nullable<int> _Quantity;
+		private string _time_to_take;
 		
-		private string _TimeCode;
+		private string _week_repeat_code;
+		
+		private System.DateTime _start_date;
+		
+		private System.Nullable<System.DateTime> _end_date;
+		
+		private System.Nullable<byte> _severity;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -313,12 +376,18 @@ namespace StillKickingMeBack
     partial void OnUser_IDFKChanged();
     partial void OnMedication_IDFKChanging(System.Nullable<int> value);
     partial void OnMedication_IDFKChanged();
-    partial void OnDosageChanging(string value);
-    partial void OnDosageChanged();
-    partial void OnQuantityChanging(System.Nullable<int> value);
-    partial void OnQuantityChanged();
-    partial void OnTimeCodeChanging(string value);
-    partial void OnTimeCodeChanged();
+    partial void Onto_takeChanging(int value);
+    partial void Onto_takeChanged();
+    partial void Ontime_to_takeChanging(string value);
+    partial void Ontime_to_takeChanged();
+    partial void Onweek_repeat_codeChanging(string value);
+    partial void Onweek_repeat_codeChanged();
+    partial void Onstart_dateChanging(System.DateTime value);
+    partial void Onstart_dateChanged();
+    partial void Onend_dateChanging(System.Nullable<System.DateTime> value);
+    partial void Onend_dateChanged();
+    partial void OnseverityChanging(System.Nullable<byte> value);
+    partial void OnseverityChanged();
     #endregion
 		
 		public Patient_Medication_rel()
@@ -386,62 +455,208 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Dosage", DbType="NVarChar(MAX)")]
-		public string Dosage
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_to_take", DbType="Int NOT NULL")]
+		public int to_take
 		{
 			get
 			{
-				return this._Dosage;
+				return this._to_take;
 			}
 			set
 			{
-				if ((this._Dosage != value))
+				if ((this._to_take != value))
 				{
-					this.OnDosageChanging(value);
+					this.Onto_takeChanging(value);
 					this.SendPropertyChanging();
-					this._Dosage = value;
-					this.SendPropertyChanged("Dosage");
-					this.OnDosageChanged();
+					this._to_take = value;
+					this.SendPropertyChanged("to_take");
+					this.Onto_takeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int")]
-		public System.Nullable<int> Quantity
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_time_to_take", DbType="NVarChar(4)")]
+		public string time_to_take
 		{
 			get
 			{
-				return this._Quantity;
+				return this._time_to_take;
 			}
 			set
 			{
-				if ((this._Quantity != value))
+				if ((this._time_to_take != value))
 				{
-					this.OnQuantityChanging(value);
+					this.Ontime_to_takeChanging(value);
 					this.SendPropertyChanging();
-					this._Quantity = value;
-					this.SendPropertyChanged("Quantity");
-					this.OnQuantityChanged();
+					this._time_to_take = value;
+					this.SendPropertyChanged("time_to_take");
+					this.Ontime_to_takeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_TimeCode", DbType="NVarChar(MAX)")]
-		public string TimeCode
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_week_repeat_code", DbType="NVarChar(7)")]
+		public string week_repeat_code
 		{
 			get
 			{
-				return this._TimeCode;
+				return this._week_repeat_code;
 			}
 			set
 			{
-				if ((this._TimeCode != value))
+				if ((this._week_repeat_code != value))
 				{
-					this.OnTimeCodeChanging(value);
+					this.Onweek_repeat_codeChanging(value);
 					this.SendPropertyChanging();
-					this._TimeCode = value;
-					this.SendPropertyChanged("TimeCode");
-					this.OnTimeCodeChanged();
+					this._week_repeat_code = value;
+					this.SendPropertyChanged("week_repeat_code");
+					this.Onweek_repeat_codeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start_date", DbType="DateTime NOT NULL")]
+		public System.DateTime start_date
+		{
+			get
+			{
+				return this._start_date;
+			}
+			set
+			{
+				if ((this._start_date != value))
+				{
+					this.Onstart_dateChanging(value);
+					this.SendPropertyChanging();
+					this._start_date = value;
+					this.SendPropertyChanged("start_date");
+					this.Onstart_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_end_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> end_date
+		{
+			get
+			{
+				return this._end_date;
+			}
+			set
+			{
+				if ((this._end_date != value))
+				{
+					this.Onend_dateChanging(value);
+					this.SendPropertyChanging();
+					this._end_date = value;
+					this.SendPropertyChanged("end_date");
+					this.Onend_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_severity", DbType="TinyInt")]
+		public System.Nullable<byte> severity
+		{
+			get
+			{
+				return this._severity;
+			}
+			set
+			{
+				if ((this._severity != value))
+				{
+					this.OnseverityChanging(value);
+					this.SendPropertyChanging();
+					this._severity = value;
+					this.SendPropertyChanged("severity");
+					this.OnseverityChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ContactType")]
+	public partial class ContactType : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Type;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnTypeChanging(string value);
+    partial void OnTypeChanged();
+    #endregion
+		
+		public ContactType()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NChar(150)")]
+		public string Type
+		{
+			get
+			{
+				return this._Type;
+			}
+			set
+			{
+				if ((this._Type != value))
+				{
+					this.OnTypeChanging(value);
+					this.SendPropertyChanging();
+					this._Type = value;
+					this.SendPropertyChanged("Type");
+					this.OnTypeChanged();
 				}
 			}
 		}
@@ -625,6 +840,360 @@ namespace StillKickingMeBack
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Event")]
+	public partial class Event : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _Patient_IDFK;
+		
+		private string _Description;
+		
+		private System.Nullable<int> _Type_Code;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnPatient_IDFKChanging(int value);
+    partial void OnPatient_IDFKChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    partial void OnType_CodeChanging(System.Nullable<int> value);
+    partial void OnType_CodeChanged();
+    #endregion
+		
+		public Event()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Patient_IDFK", DbType="Int NOT NULL")]
+		public int Patient_IDFK
+		{
+			get
+			{
+				return this._Patient_IDFK;
+			}
+			set
+			{
+				if ((this._Patient_IDFK != value))
+				{
+					this.OnPatient_IDFKChanging(value);
+					this.SendPropertyChanging();
+					this._Patient_IDFK = value;
+					this.SendPropertyChanged("Patient_IDFK");
+					this.OnPatient_IDFKChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type_Code", DbType="Int")]
+		public System.Nullable<int> Type_Code
+		{
+			get
+			{
+				return this._Type_Code;
+			}
+			set
+			{
+				if ((this._Type_Code != value))
+				{
+					this.OnType_CodeChanging(value);
+					this.SendPropertyChanging();
+					this._Type_Code = value;
+					this.SendPropertyChanged("Type_Code");
+					this.OnType_CodeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Event_Type")]
+	public partial class Event_Type : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private string _Name;
+		
+		private string _Description;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    partial void OnDescriptionChanging(string value);
+    partial void OnDescriptionChanged();
+    #endregion
+		
+		public Event_Type()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(255) NOT NULL", CanBeNull=false)]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
+		public string Description
+		{
+			get
+			{
+				return this._Description;
+			}
+			set
+			{
+				if ((this._Description != value))
+				{
+					this.OnDescriptionChanging(value);
+					this.SendPropertyChanging();
+					this._Description = value;
+					this.SendPropertyChanged("Description");
+					this.OnDescriptionChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Medical Condition]")]
+	public partial class Medical_Condition : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private System.Nullable<int> _Patient_IDFK;
+		
+		private string _Name;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void OnPatient_IDFKChanging(System.Nullable<int> value);
+    partial void OnPatient_IDFKChanged();
+    partial void OnNameChanging(string value);
+    partial void OnNameChanged();
+    #endregion
+		
+		public Medical_Condition()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Patient_IDFK", DbType="Int")]
+		public System.Nullable<int> Patient_IDFK
+		{
+			get
+			{
+				return this._Patient_IDFK;
+			}
+			set
+			{
+				if ((this._Patient_IDFK != value))
+				{
+					this.OnPatient_IDFKChanging(value);
+					this.SendPropertyChanging();
+					this._Patient_IDFK = value;
+					this.SendPropertyChanged("Patient_IDFK");
+					this.OnPatient_IDFKChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(MAX)")]
+		public string Name
+		{
+			get
+			{
+				return this._Name;
+			}
+			set
+			{
+				if ((this._Name != value))
+				{
+					this.OnNameChanging(value);
+					this.SendPropertyChanging();
+					this._Name = value;
+					this.SendPropertyChanged("Name");
+					this.OnNameChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.MedicalInfo")]
 	public partial class MedicalInfo : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -771,17 +1340,17 @@ namespace StillKickingMeBack
 		
 		private string _Name;
 		
-		private string _Description;
+		private System.Nullable<int> _pills_to_take;
 		
-		private System.Nullable<int> _Quantity;
+		private bool _eat_with_food;
 		
-		private System.Nullable<System.DateTime> _DateStarted;
+		private string _dosage_mg;
 		
-		private System.Nullable<System.DateTime> _DateStopped;
+		private System.Nullable<int> _repeat_hours;
 		
-		private string _Prescriber;
+		private string _repeat_start;
 		
-		private System.Nullable<bool> _Refillable;
+		private bool _active;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -793,18 +1362,18 @@ namespace StillKickingMeBack
     partial void OnUserIDFKChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
-    partial void OnDescriptionChanging(string value);
-    partial void OnDescriptionChanged();
-    partial void OnQuantityChanging(System.Nullable<int> value);
-    partial void OnQuantityChanged();
-    partial void OnDateStartedChanging(System.Nullable<System.DateTime> value);
-    partial void OnDateStartedChanged();
-    partial void OnDateStoppedChanging(System.Nullable<System.DateTime> value);
-    partial void OnDateStoppedChanged();
-    partial void OnPrescriberChanging(string value);
-    partial void OnPrescriberChanged();
-    partial void OnRefillableChanging(System.Nullable<bool> value);
-    partial void OnRefillableChanged();
+    partial void Onpills_to_takeChanging(System.Nullable<int> value);
+    partial void Onpills_to_takeChanged();
+    partial void Oneat_with_foodChanging(bool value);
+    partial void Oneat_with_foodChanged();
+    partial void Ondosage_mgChanging(string value);
+    partial void Ondosage_mgChanged();
+    partial void Onrepeat_hoursChanging(System.Nullable<int> value);
+    partial void Onrepeat_hoursChanged();
+    partial void Onrepeat_startChanging(string value);
+    partial void Onrepeat_startChanged();
+    partial void OnactiveChanging(bool value);
+    partial void OnactiveChanged();
     #endregion
 		
 		public Medication()
@@ -872,232 +1441,122 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Description", DbType="NVarChar(MAX)")]
-		public string Description
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pills_to_take", DbType="Int")]
+		public System.Nullable<int> pills_to_take
 		{
 			get
 			{
-				return this._Description;
+				return this._pills_to_take;
 			}
 			set
 			{
-				if ((this._Description != value))
+				if ((this._pills_to_take != value))
 				{
-					this.OnDescriptionChanging(value);
+					this.Onpills_to_takeChanging(value);
 					this.SendPropertyChanging();
-					this._Description = value;
-					this.SendPropertyChanged("Description");
-					this.OnDescriptionChanged();
+					this._pills_to_take = value;
+					this.SendPropertyChanged("pills_to_take");
+					this.Onpills_to_takeChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Quantity", DbType="Int")]
-		public System.Nullable<int> Quantity
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eat_with_food", DbType="Bit NOT NULL")]
+		public bool eat_with_food
 		{
 			get
 			{
-				return this._Quantity;
+				return this._eat_with_food;
 			}
 			set
 			{
-				if ((this._Quantity != value))
+				if ((this._eat_with_food != value))
 				{
-					this.OnQuantityChanging(value);
+					this.Oneat_with_foodChanging(value);
 					this.SendPropertyChanging();
-					this._Quantity = value;
-					this.SendPropertyChanged("Quantity");
-					this.OnQuantityChanged();
+					this._eat_with_food = value;
+					this.SendPropertyChanged("eat_with_food");
+					this.Oneat_with_foodChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateStarted", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DateStarted
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_dosage_mg", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string dosage_mg
 		{
 			get
 			{
-				return this._DateStarted;
+				return this._dosage_mg;
 			}
 			set
 			{
-				if ((this._DateStarted != value))
+				if ((this._dosage_mg != value))
 				{
-					this.OnDateStartedChanging(value);
+					this.Ondosage_mgChanging(value);
 					this.SendPropertyChanging();
-					this._DateStarted = value;
-					this.SendPropertyChanged("DateStarted");
-					this.OnDateStartedChanged();
+					this._dosage_mg = value;
+					this.SendPropertyChanged("dosage_mg");
+					this.Ondosage_mgChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DateStopped", DbType="DateTime")]
-		public System.Nullable<System.DateTime> DateStopped
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repeat_hours", DbType="Int")]
+		public System.Nullable<int> repeat_hours
 		{
 			get
 			{
-				return this._DateStopped;
+				return this._repeat_hours;
 			}
 			set
 			{
-				if ((this._DateStopped != value))
+				if ((this._repeat_hours != value))
 				{
-					this.OnDateStoppedChanging(value);
+					this.Onrepeat_hoursChanging(value);
 					this.SendPropertyChanging();
-					this._DateStopped = value;
-					this.SendPropertyChanged("DateStopped");
-					this.OnDateStoppedChanged();
+					this._repeat_hours = value;
+					this.SendPropertyChanged("repeat_hours");
+					this.Onrepeat_hoursChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Prescriber", DbType="NVarChar(MAX)")]
-		public string Prescriber
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repeat_start", DbType="NVarChar(4)")]
+		public string repeat_start
 		{
 			get
 			{
-				return this._Prescriber;
+				return this._repeat_start;
 			}
 			set
 			{
-				if ((this._Prescriber != value))
+				if ((this._repeat_start != value))
 				{
-					this.OnPrescriberChanging(value);
+					this.Onrepeat_startChanging(value);
 					this.SendPropertyChanging();
-					this._Prescriber = value;
-					this.SendPropertyChanged("Prescriber");
-					this.OnPrescriberChanged();
+					this._repeat_start = value;
+					this.SendPropertyChanged("repeat_start");
+					this.Onrepeat_startChanged();
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Refillable", DbType="Bit")]
-		public System.Nullable<bool> Refillable
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
+		public bool active
 		{
 			get
 			{
-				return this._Refillable;
+				return this._active;
 			}
 			set
 			{
-				if ((this._Refillable != value))
+				if ((this._active != value))
 				{
-					this.OnRefillableChanging(value);
+					this.OnactiveChanging(value);
 					this.SendPropertyChanging();
-					this._Refillable = value;
-					this.SendPropertyChanged("Refillable");
-					this.OnRefillableChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Patient_Caregiver_rel")]
-	public partial class Patient_Caregiver_rel : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private System.Nullable<int> _Caregiver_IDFK;
-		
-		private System.Nullable<int> _Patient_IDFK;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void OnCaregiver_IDFKChanging(System.Nullable<int> value);
-    partial void OnCaregiver_IDFKChanged();
-    partial void OnPatient_IDFKChanging(System.Nullable<int> value);
-    partial void OnPatient_IDFKChanged();
-    #endregion
-		
-		public Patient_Caregiver_rel()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Caregiver_IDFK", DbType="Int")]
-		public System.Nullable<int> Caregiver_IDFK
-		{
-			get
-			{
-				return this._Caregiver_IDFK;
-			}
-			set
-			{
-				if ((this._Caregiver_IDFK != value))
-				{
-					this.OnCaregiver_IDFKChanging(value);
-					this.SendPropertyChanging();
-					this._Caregiver_IDFK = value;
-					this.SendPropertyChanged("Caregiver_IDFK");
-					this.OnCaregiver_IDFKChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Patient_IDFK", DbType="Int")]
-		public System.Nullable<int> Patient_IDFK
-		{
-			get
-			{
-				return this._Patient_IDFK;
-			}
-			set
-			{
-				if ((this._Patient_IDFK != value))
-				{
-					this.OnPatient_IDFKChanging(value);
-					this.SendPropertyChanging();
-					this._Patient_IDFK = value;
-					this.SendPropertyChanged("Patient_IDFK");
-					this.OnPatient_IDFKChanged();
+					this._active = value;
+					this.SendPropertyChanged("active");
+					this.OnactiveChanged();
 				}
 			}
 		}
@@ -1305,17 +1764,17 @@ namespace StillKickingMeBack
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Medical Condition]")]
-	public partial class Medical_Condition : INotifyPropertyChanging, INotifyPropertyChanged
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.Patient_Caregiver_rel")]
+	public partial class Patient_Caregiver_rel : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		
 		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
 		
 		private int _Id;
 		
-		private System.Nullable<int> _Patient_IDFK;
+		private System.Nullable<int> _Caregiver_IDFK;
 		
-		private string _Name;
+		private System.Nullable<int> _Patient_IDFK;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1323,18 +1782,18 @@ namespace StillKickingMeBack
     partial void OnCreated();
     partial void OnIdChanging(int value);
     partial void OnIdChanged();
+    partial void OnCaregiver_IDFKChanging(System.Nullable<int> value);
+    partial void OnCaregiver_IDFKChanged();
     partial void OnPatient_IDFKChanging(System.Nullable<int> value);
     partial void OnPatient_IDFKChanged();
-    partial void OnNameChanging(string value);
-    partial void OnNameChanged();
     #endregion
 		
-		public Medical_Condition()
+		public Patient_Caregiver_rel()
 		{
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int Id
 		{
 			get
@@ -1350,6 +1809,26 @@ namespace StillKickingMeBack
 					this._Id = value;
 					this.SendPropertyChanged("Id");
 					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Caregiver_IDFK", DbType="Int")]
+		public System.Nullable<int> Caregiver_IDFK
+		{
+			get
+			{
+				return this._Caregiver_IDFK;
+			}
+			set
+			{
+				if ((this._Caregiver_IDFK != value))
+				{
+					this.OnCaregiver_IDFKChanging(value);
+					this.SendPropertyChanging();
+					this._Caregiver_IDFK = value;
+					this.SendPropertyChanged("Caregiver_IDFK");
+					this.OnCaregiver_IDFKChanged();
 				}
 			}
 		}
@@ -1370,26 +1849,6 @@ namespace StillKickingMeBack
 					this._Patient_IDFK = value;
 					this.SendPropertyChanged("Patient_IDFK");
 					this.OnPatient_IDFKChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Name", DbType="NVarChar(MAX)")]
-		public string Name
-		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				if ((this._Name != value))
-				{
-					this.OnNameChanging(value);
-					this.SendPropertyChanging();
-					this._Name = value;
-					this.SendPropertyChanged("Name");
-					this.OnNameChanged();
 				}
 			}
 		}

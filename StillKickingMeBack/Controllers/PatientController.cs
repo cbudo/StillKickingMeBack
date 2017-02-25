@@ -31,7 +31,7 @@ namespace StillKickingMeBack.Controllers
         // POST: api/patient/register
         [HttpPost]
         [Route("register")]
-        public Patient Create(PatientModel patient)
+        public int Create(PatientModel patient)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
             var db = new StillKickingDBDataContext();
@@ -43,8 +43,48 @@ namespace StillKickingMeBack.Controllers
             a.DOB = patient.DOB;
             db.Patients.InsertOnSubmit(a);
             db.SubmitChanges();
-            return a;
+            return a.Id;
         }
+
+        // POST: api/patient/login
+        [HttpPost]
+        [Route("login")]
+        public int Login(UserModel user)
+        {
+            var db = new StillKickingDBDataContext();
+            var hashedPwd = GetHashedString(user.password);
+            var patient = db.Patients.Where(m => m.Email == user.username).Where(m => m.Password == hashedPwd).First();
+
+            return patient.Id;
+        }
+
+        //public static string Encrypt(string data)
+        //{
+        //    TripleDESCryptoServiceProvider DES = new TripleDESCryptoServiceProvider();
+
+        //    DES.Mode = CipherMode.ECB;
+        //    DES.Key = GetKey("a1!B78s!5(");
+
+        //    DES.Padding = PaddingMode.PKCS7;
+        //    ICryptoTransform DESEncrypt = DES.CreateEncryptor();
+        //    Byte[] Buffer = ASCIIEncoding.ASCII.GetBytes(data);
+
+        //    return Convert.ToBase64String(DESEncrypt.TransformFinalBlock(Buffer, 0, Buffer.Length));
+        //}
+
+        //public static string Decrypt(string data)
+        //{
+        //    TripleDESCryptoServiceProvider DES = new TripleDESCryptoServiceProvider();
+
+        //    DES.Mode = CipherMode.ECB;
+        //    DES.Key = GetKey("a1!B78s!5(");
+
+        //    DES.Padding = PaddingMode.PKCS7;
+        //    ICryptoTransform DESEncrypt = DES.CreateDecryptor();
+        //    Byte[] Buffer = Convert.FromBase64String(data.Replace(" ", "+"));
+
+        //    return Encoding.UTF8.GetString(DESEncrypt.TransformFinalBlock(Buffer, 0, Buffer.Length));
+        //}
 
         private string GetHashedString(string _PW)
         {
