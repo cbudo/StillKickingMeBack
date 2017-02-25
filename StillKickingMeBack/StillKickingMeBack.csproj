@@ -200,6 +200,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MedicationController.cs" />
     <Compile Include="Controllers\PatientController.cs" />
+    <Compile Include="Controllers\ScheduleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -208,6 +209,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MedicationModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
+    <Compile Include="Models\ScheduleModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -283,6 +285,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Medication\" />
     <Folder Include="Views\Patient\" />
+    <Folder Include="Views\Schedule\" />
     <Folder Include="Views\Token\" />
   </ItemGroup>
   <ItemGroup>
