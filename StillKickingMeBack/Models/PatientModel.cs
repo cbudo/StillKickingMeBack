@@ -13,6 +13,8 @@ namespace StillKickingMeBack.Models
 
         public string Password { get; set; }
 
-        public string Phone { get; set; }
+        public string Sex { get; set; }
+
+        public string DOB { get; set; }
     }
 }
