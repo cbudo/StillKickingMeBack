@@ -68,5 +68,11 @@
         <elementListCompartment Id="c5664916-f8b8-4483-95f8-f93fea0718c4" absoluteBounds="9.765, 5.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="5ddd080b-b9ab-42a2-8e97-e815194941fa" absoluteBounds="6.375, 5.75, 2, 1.3862939453125">
+      <DataClassMoniker Name="/StillKickingDBDataContext/Medical_Condition" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1202b79a-c563-487b-a8ff-48e4a1a6490b" absoluteBounds="6.39, 6.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
