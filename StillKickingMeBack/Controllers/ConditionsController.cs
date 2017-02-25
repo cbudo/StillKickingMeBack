@@ -11,19 +11,17 @@ namespace StillKickingMeBack.Controllers
     [RoutePrefix("api/patient")]
     public class ConditionsController : ApiController
     {
-        // GET: api/patient/conditions
+        // GET: api/patient/example@example.com/conditions
         [HttpGet]
-        [Route("conditions")]
-
+        [Route("{patientId:int}/conditions")]
         public IEnumerable<Medical_Condition> getConditions(int patientId)
         {
-            JavaScriptSerializer js = new JavaScriptSerializer();
             var db = new StillKickingDBDataContext();
-            var conditions = db.Medical_Conditions.Where(p => p.Id == patientId).AsEnumerable();
+            var conditions = db.Medical_Conditions.Where(p => p.Patient_IDFK == patientId);
             return conditions;
         }
 
-        // POST: api/patient
+        // POST: api/patient/example@example.com/conditions
         [HttpPost]
         [Route("{patientId:int}/conditions")]
         public Medical_Condition Create(int patientId, ConditionsModel condition)
