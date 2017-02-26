@@ -19,7 +19,7 @@ once you reach 3 new feature pull requests or 5 medium sized bug fixes, you will
 Deploy project to Azure Web Services, make copy of database to be added at a later date
 
 ## Contributor Guide
-(CONTRIBUTING.MD)[./CONTRIBUTING.md]
+(CONTRIBUTING.MD)[https://github.com/cbudo/StillKickingMeBack/blob/master/CONTRIBUTING.md]
 
 ## License 
 MIT License
