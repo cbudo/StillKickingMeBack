@@ -32,7 +32,7 @@ namespace StillKickingMeBack.Controllers
             return null;
         }
         [HttpGet]
-        [Route("api/patient/contact/{contactId:int")]
+        [Route("api/patient/contact/{contactId:int}")]
         public Caregiver AddContact(int contactId)
         {
             var headers = Request.Headers;

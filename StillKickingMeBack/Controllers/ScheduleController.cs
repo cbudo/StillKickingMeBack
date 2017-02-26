@@ -34,7 +34,7 @@ namespace StillKickingMeBack.Controllers
                 return from s in schedules
                        join m in db.Medications
                        on s.Medication_IDFK equals m.Id
-                       select new JoinedPatientMeds(m.Name, s.to_take, m.eat_with_food, m.dosage_mg, s.start_date, s.week_repeat_code, s.end_date, s.severity, m.active, m.max_pills);
+                       select new JoinedPatientMeds(m.Name, s.amount, m.eat_with_food, m.dosage_mg, s.start_date, s.week_repeat_code, s.end_date, s.severity, m.active, m.max_pills, s.repeat_interval, s.time_to_take);
             }
             return null;
         }
@@ -48,15 +48,14 @@ namespace StillKickingMeBack.Controllers
                 var db = new StillKickingDBDataContext();
                 var schedule = new Patient_Medication_rel();
                 schedule.active = model.active;
-                schedule.end_date = model.endDate;
-                schedule.Medication_IDFK = model.medId;
+                schedule.end_date = model.end_date;
+                schedule.Medication_IDFK = model.med_Id;
                 schedule.severity = model.severity;
-                schedule.start_date = model.startDate;
-                schedule.end_date = null;
-                schedule.time_to_take = model.timeToTake;
-                schedule.to_take = model.toTake;
+                schedule.start_date = model.start_date;
+                schedule.time_to_take = model.time_to_take;
+                schedule.repeat_interval =  model.repeat_interval;
                 schedule.User_IDFK = Convert.ToInt32(headers.GetValues("Authorization").First());
-                schedule.week_repeat_code = model.weekRepeatCode;
+                schedule.week_repeat_code = model.week_repeat_code;
                 db.Patient_Medication_rels.InsertOnSubmit(schedule);
                 db.SubmitChanges();
                 return schedule.Id;

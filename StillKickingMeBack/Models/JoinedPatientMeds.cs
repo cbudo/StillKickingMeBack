@@ -7,9 +7,9 @@ namespace StillKickingMeBack.Models
 {
     public class JoinedPatientMeds
     {
-        public JoinedPatientMeds(string name, int pills, bool food, string dosage,
-             DateTime? start, string repeatCode,
-            DateTime? end, byte? severity, bool active, int? max)
+        public JoinedPatientMeds(string name, int? pills, bool food, string dosage,
+             DateTime? start, string repeatCode, DateTime? end, byte? severity, bool active, 
+             int? max, double? repeat_hours, string repeat_start)
         {
             this.name = name;
             this.pillsToTake = pills;
@@ -21,12 +21,15 @@ namespace StillKickingMeBack.Models
             this.weekRepeatCode = repeatCode;
             this.active = active;
             this.maxPills = max;
+            this.repeatStart = repeat_start;
+            this.repeatHours = repeat_hours;
+
         }
         public string name { get; set; }
-        public int pillsToTake { get; set; }
+        public int? pillsToTake { get; set; }
         public bool eatWithFood { get; set; }
         public string dosage { get; set; }
-        public int? repeatHours { get; set; }
+        public double? repeatHours { get; set; }
         public string repeatStart { get; set; }
         public string weekRepeatCode { get; set; }
         public DateTime? startDate { get; set; }
