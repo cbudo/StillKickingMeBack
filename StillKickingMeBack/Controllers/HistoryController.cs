@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StillKickingMeBack.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -11,27 +12,35 @@ namespace StillKickingMeBack.Controllers
     {
         [HttpGet]
         [Route("api/patient/today")]
-        public IEnumerable<History> GetToday()
+        public IEnumerable<HistoryObject> GetToday()
         {
             var headers = Request.Headers;
             if (headers.Contains("Authorization"))
             {
                 var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
                 var db = new StillKickingDBDataContext();
-                return db.Histories.Where(h => h.patient_idfk == authCode && h.completed_time.GetValueOrDefault() > DateTime.Now.AddDays(-1));
+                var past = db.Histories.Where(h => h.patient_idfk == authCode && h.completed_time.GetValueOrDefault().Date > DateTime.Now.AddHours(-24));
+                return from p in past
+                       join m in db.Medications
+                       on p.drug_idfk equals m.Id
+                       select new HistoryObject(p, m.Name, m.dosage_mg);
             }
             return null;
         }
         [HttpGet]
         [Route("api/patient/history")]
-        public IEnumerable<History> GetPast()
+        public IEnumerable<HistoryObject> GetPast()
         {
             var headers = Request.Headers;
             if (headers.Contains("Authorization"))
             {
                 var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
                 var db = new StillKickingDBDataContext();
-                return db.Histories.Where(h => h.patient_idfk == authCode && h.completed_time.GetValueOrDefault().Date > DateTime.Now.AddHours(-48));
+                var past = db.Histories.Where(h => h.patient_idfk == authCode && h.completed_time.GetValueOrDefault().Date > DateTime.Now.AddHours(-48));
+                return from p in past
+                       join m in db.Medications
+                       on p.drug_idfk equals m.Id
+                       select new HistoryObject(p,m.Name,m.dosage_mg);
             }
             return null;
         }
