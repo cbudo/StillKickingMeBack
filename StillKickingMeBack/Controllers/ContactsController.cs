@@ -35,6 +35,30 @@ namespace StillKickingMeBack.Controllers
             }
             return null;
         }
+        [HttpPut]
+        [Route("api/patient/contact")]
+        public IEnumerable<caregiverWithTypes> UpdateContact(ContactModel model)
+        {
+            var headers = Request.Headers;
+            if (headers.Contains("Authorization"))
+            {
+                var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
+                var db = new StillKickingDBDataContext();
+                var caregiver = db.Caregivers.Where(c => c.Id == model.Id).First();
+                caregiver.ContactType_IDFK = model.ContactType;
+                caregiver.Name = model.Name;
+                caregiver.Notes = model.Notes;
+                caregiver.Patient_IDFK = authCode;
+                caregiver.Phone = model.phone;
+                db.SubmitChanges();
+                var caregivers = db.Caregivers.Where(c => c.Patient_IDFK == Convert.ToInt32(headers.GetValues("Authorization").First()));
+                return from c in caregivers
+                       join t in db.ContactTypes
+                       on c.ContactType_IDFK equals t.Id
+                       select new caregiverWithTypes(c.Id, c.Name, c.Phone, c.Notes, c.ContactType_IDFK, c.Patient_IDFK, t.Type);
+            }
+            return null;
+        }
         [HttpGet]
         [Route("api/patient/contact/{contactId:int}")]
         public Caregiver AddContact(int contactId)
