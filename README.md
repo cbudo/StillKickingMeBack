@@ -15,15 +15,6 @@ If you are interested in contrubting, create a fork and make a pull request to t
 One of the contributors will test your submission and if they find it satisfactory, will accept the pull request - 
 once you reach 3 new feature pull requests or 5 medium sized bug fixes, you will be invited to be a contributor to the project
 
-
-# StillKickingMeBack
-this is the backend API for [/Doolan/StillKicking](https://github.com/doolan/StillKicking)
-It was created for HackIllinois 2017 as an open source project.
-
-## Description
-This project was created to improve the lives of those that have family members with
-disabilites that require them to stay and perform the role of their caregiver.
-  
 ## BUILD/INSTALLATION INSTRUCTIONS
 Deploy project to Azure Web Services, make copy of database to be added at a later date
 
