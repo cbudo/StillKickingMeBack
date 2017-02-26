@@ -28,7 +28,7 @@ namespace StillKickingMeBack.Controllers
             {
                 var db = new StillKickingDBDataContext();
                 var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
-                return db.Medications.Where(p => p.UserIDFK == authCode);
+                return db.Medications.Where(p => p.UserIDFK == authCode && p.active);
             }
             return null;
         }
@@ -53,13 +53,12 @@ namespace StillKickingMeBack.Controllers
                 var db = new StillKickingDBDataContext();
                 Medication drugs = new Medication();
                 drugs.UserIDFK = authCode;
-                drugs.Name = meds.Name;
-                drugs.pills_to_take = meds.pills_to_take;
-                drugs.active = meds.active;
+                drugs.Name = meds.name;
+                drugs.active = true;
                 drugs.dosage_mg = meds.dosage_mg;
                 drugs.eat_with_food = meds.eat_with_food;
-                drugs.repeat_hours = meds.repeat_hours;
-                drugs.repeat_start = meds.repeat_start;
+                drugs.max_pills = meds.max_pills;
+                drugs.notes = meds.notes;
                 db.Medications.InsertOnSubmit(drugs);
                 db.SubmitChanges();
                 return drugs.Id;

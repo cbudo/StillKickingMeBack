@@ -7,13 +7,10 @@ namespace StillKickingMeBack.Models
 {
     public class MedicationModel
     {
-        public int UserId { get; set; }
-        public string Name { get; set; }
-        public int pills_to_take { get; set; }
+        public string name { get; set; }
         public bool eat_with_food { get; set; }
         public string dosage_mg { get; set; }
-        public int repeat_hours { get; set; }
-        public string repeat_start { get; set; }
-        public bool active { get; set; }
+        public string notes { get; set; }
+        public int max_pills { get; set; }
     }
 }

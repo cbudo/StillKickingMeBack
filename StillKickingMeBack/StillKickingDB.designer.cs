@@ -48,6 +48,9 @@ namespace StillKickingMeBack
     partial void InsertEvent_Type(Event_Type instance);
     partial void UpdateEvent_Type(Event_Type instance);
     partial void DeleteEvent_Type(Event_Type instance);
+    partial void InsertHistory(History instance);
+    partial void UpdateHistory(History instance);
+    partial void DeleteHistory(History instance);
     partial void InsertMedical_Condition(Medical_Condition instance);
     partial void UpdateMedical_Condition(Medical_Condition instance);
     partial void DeleteMedical_Condition(Medical_Condition instance);
@@ -63,9 +66,6 @@ namespace StillKickingMeBack
     partial void InsertPatient_Caregiver_rel(Patient_Caregiver_rel instance);
     partial void UpdatePatient_Caregiver_rel(Patient_Caregiver_rel instance);
     partial void DeletePatient_Caregiver_rel(Patient_Caregiver_rel instance);
-    partial void InsertHistory(History instance);
-    partial void UpdateHistory(History instance);
-    partial void DeleteHistory(History instance);
     #endregion
 		
 		public StillKickingDBDataContext() : 
@@ -146,6 +146,14 @@ namespace StillKickingMeBack
 			}
 		}
 		
+		public System.Data.Linq.Table<History> Histories
+		{
+			get
+			{
+				return this.GetTable<History>();
+			}
+		}
+		
 		public System.Data.Linq.Table<Medical_Condition> Medical_Conditions
 		{
 			get
@@ -183,14 +191,6 @@ namespace StillKickingMeBack
 			get
 			{
 				return this.GetTable<Patient_Caregiver_rel>();
-			}
-		}
-		
-		public System.Data.Linq.Table<History> Histories
-		{
-			get
-			{
-				return this.GetTable<History>();
 			}
 		}
 	}
@@ -1143,6 +1143,212 @@ namespace StillKickingMeBack
 		}
 	}
 	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.History")]
+	public partial class History : INotifyPropertyChanging, INotifyPropertyChanged
+	{
+		
+		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+		
+		private int _Id;
+		
+		private int _drug_idfk;
+		
+		private int _patient_idfk;
+		
+		private string _timecode;
+		
+		private byte _amount_taken;
+		
+		private bool _on_time;
+		
+		private System.Nullable<System.DateTime> _completed_time;
+		
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void OnIdChanging(int value);
+    partial void OnIdChanged();
+    partial void Ondrug_idfkChanging(int value);
+    partial void Ondrug_idfkChanged();
+    partial void Onpatient_idfkChanging(int value);
+    partial void Onpatient_idfkChanged();
+    partial void OntimecodeChanging(string value);
+    partial void OntimecodeChanged();
+    partial void Onamount_takenChanging(byte value);
+    partial void Onamount_takenChanged();
+    partial void Onon_timeChanging(bool value);
+    partial void Onon_timeChanged();
+    partial void Oncompleted_timeChanging(System.Nullable<System.DateTime> value);
+    partial void Oncompleted_timeChanged();
+    #endregion
+		
+		public History()
+		{
+			OnCreated();
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+		public int Id
+		{
+			get
+			{
+				return this._Id;
+			}
+			set
+			{
+				if ((this._Id != value))
+				{
+					this.OnIdChanging(value);
+					this.SendPropertyChanging();
+					this._Id = value;
+					this.SendPropertyChanged("Id");
+					this.OnIdChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_drug_idfk", DbType="Int NOT NULL")]
+		public int drug_idfk
+		{
+			get
+			{
+				return this._drug_idfk;
+			}
+			set
+			{
+				if ((this._drug_idfk != value))
+				{
+					this.Ondrug_idfkChanging(value);
+					this.SendPropertyChanging();
+					this._drug_idfk = value;
+					this.SendPropertyChanged("drug_idfk");
+					this.Ondrug_idfkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_patient_idfk", DbType="Int NOT NULL")]
+		public int patient_idfk
+		{
+			get
+			{
+				return this._patient_idfk;
+			}
+			set
+			{
+				if ((this._patient_idfk != value))
+				{
+					this.Onpatient_idfkChanging(value);
+					this.SendPropertyChanging();
+					this._patient_idfk = value;
+					this.SendPropertyChanged("patient_idfk");
+					this.Onpatient_idfkChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timecode", DbType="NVarChar(4)")]
+		public string timecode
+		{
+			get
+			{
+				return this._timecode;
+			}
+			set
+			{
+				if ((this._timecode != value))
+				{
+					this.OntimecodeChanging(value);
+					this.SendPropertyChanging();
+					this._timecode = value;
+					this.SendPropertyChanged("timecode");
+					this.OntimecodeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_amount_taken", DbType="TinyInt NOT NULL")]
+		public byte amount_taken
+		{
+			get
+			{
+				return this._amount_taken;
+			}
+			set
+			{
+				if ((this._amount_taken != value))
+				{
+					this.Onamount_takenChanging(value);
+					this.SendPropertyChanging();
+					this._amount_taken = value;
+					this.SendPropertyChanged("amount_taken");
+					this.Onamount_takenChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_on_time", DbType="Bit NOT NULL")]
+		public bool on_time
+		{
+			get
+			{
+				return this._on_time;
+			}
+			set
+			{
+				if ((this._on_time != value))
+				{
+					this.Onon_timeChanging(value);
+					this.SendPropertyChanging();
+					this._on_time = value;
+					this.SendPropertyChanged("on_time");
+					this.Onon_timeChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_completed_time", DbType="DateTime")]
+		public System.Nullable<System.DateTime> completed_time
+		{
+			get
+			{
+				return this._completed_time;
+			}
+			set
+			{
+				if ((this._completed_time != value))
+				{
+					this.Oncompleted_timeChanging(value);
+					this.SendPropertyChanging();
+					this._completed_time = value;
+					this.SendPropertyChanged("completed_time");
+					this.Oncompleted_timeChanged();
+				}
+			}
+		}
+		
+		public event PropertyChangingEventHandler PropertyChanging;
+		
+		public event PropertyChangedEventHandler PropertyChanged;
+		
+		protected virtual void SendPropertyChanging()
+		{
+			if ((this.PropertyChanging != null))
+			{
+				this.PropertyChanging(this, emptyChangingEventArgs);
+			}
+		}
+		
+		protected virtual void SendPropertyChanged(String propertyName)
+		{
+			if ((this.PropertyChanged != null))
+			{
+				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			}
+		}
+	}
+	
 	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.[Medical Condition]")]
 	public partial class Medical_Condition : INotifyPropertyChanging, INotifyPropertyChanged
 	{
@@ -1399,19 +1605,15 @@ namespace StillKickingMeBack
 		
 		private string _Name;
 		
-		private System.Nullable<int> _pills_to_take;
-		
 		private bool _eat_with_food;
 		
 		private string _dosage_mg;
 		
-		private System.Nullable<int> _repeat_hours;
-		
-		private string _repeat_start;
-		
 		private bool _active;
 		
-		private System.Nullable<int> _maxtimes;
+		private System.Nullable<int> _max_pills;
+		
+		private string _notes;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -1423,20 +1625,16 @@ namespace StillKickingMeBack
     partial void OnUserIDFKChanged();
     partial void OnNameChanging(string value);
     partial void OnNameChanged();
-    partial void Onpills_to_takeChanging(System.Nullable<int> value);
-    partial void Onpills_to_takeChanged();
     partial void Oneat_with_foodChanging(bool value);
     partial void Oneat_with_foodChanged();
     partial void Ondosage_mgChanging(string value);
     partial void Ondosage_mgChanged();
-    partial void Onrepeat_hoursChanging(System.Nullable<int> value);
-    partial void Onrepeat_hoursChanged();
-    partial void Onrepeat_startChanging(string value);
-    partial void Onrepeat_startChanged();
     partial void OnactiveChanging(bool value);
     partial void OnactiveChanged();
-    partial void OnmaxtimesChanging(System.Nullable<int> value);
-    partial void OnmaxtimesChanged();
+    partial void Onmax_pillsChanging(System.Nullable<int> value);
+    partial void Onmax_pillsChanged();
+    partial void OnnotesChanging(string value);
+    partial void OnnotesChanged();
     #endregion
 		
 		public Medication()
@@ -1504,26 +1702,6 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_pills_to_take", DbType="Int")]
-		public System.Nullable<int> pills_to_take
-		{
-			get
-			{
-				return this._pills_to_take;
-			}
-			set
-			{
-				if ((this._pills_to_take != value))
-				{
-					this.Onpills_to_takeChanging(value);
-					this.SendPropertyChanging();
-					this._pills_to_take = value;
-					this.SendPropertyChanged("pills_to_take");
-					this.Onpills_to_takeChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_eat_with_food", DbType="Bit NOT NULL")]
 		public bool eat_with_food
 		{
@@ -1564,46 +1742,6 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repeat_hours", DbType="Int")]
-		public System.Nullable<int> repeat_hours
-		{
-			get
-			{
-				return this._repeat_hours;
-			}
-			set
-			{
-				if ((this._repeat_hours != value))
-				{
-					this.Onrepeat_hoursChanging(value);
-					this.SendPropertyChanging();
-					this._repeat_hours = value;
-					this.SendPropertyChanged("repeat_hours");
-					this.Onrepeat_hoursChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repeat_start", DbType="NVarChar(4)")]
-		public string repeat_start
-		{
-			get
-			{
-				return this._repeat_start;
-			}
-			set
-			{
-				if ((this._repeat_start != value))
-				{
-					this.Onrepeat_startChanging(value);
-					this.SendPropertyChanging();
-					this._repeat_start = value;
-					this.SendPropertyChanged("repeat_start");
-					this.Onrepeat_startChanged();
-				}
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_active", DbType="Bit NOT NULL")]
 		public bool active
 		{
@@ -1624,22 +1762,42 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_maxtimes", DbType="Int")]
-		public System.Nullable<int> maxtimes
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_max_pills", DbType="Int")]
+		public System.Nullable<int> max_pills
 		{
 			get
 			{
-				return this._maxtimes;
+				return this._max_pills;
 			}
 			set
 			{
-				if ((this._maxtimes != value))
+				if ((this._max_pills != value))
 				{
-					this.OnmaxtimesChanging(value);
+					this.Onmax_pillsChanging(value);
 					this.SendPropertyChanging();
-					this._maxtimes = value;
-					this.SendPropertyChanged("maxtimes");
-					this.OnmaxtimesChanged();
+					this._max_pills = value;
+					this.SendPropertyChanged("max_pills");
+					this.Onmax_pillsChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_notes", DbType="NVarChar(MAX)")]
+		public string notes
+		{
+			get
+			{
+				return this._notes;
+			}
+			set
+			{
+				if ((this._notes != value))
+				{
+					this.OnnotesChanging(value);
+					this.SendPropertyChanging();
+					this._notes = value;
+					this.SendPropertyChanged("notes");
+					this.OnnotesChanged();
 				}
 			}
 		}
@@ -1932,212 +2090,6 @@ namespace StillKickingMeBack
 					this._Patient_IDFK = value;
 					this.SendPropertyChanged("Patient_IDFK");
 					this.OnPatient_IDFKChanged();
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.History")]
-	public partial class History : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _Id;
-		
-		private int _drug_idfk;
-		
-		private int _patient_idfk;
-		
-		private string _timecode;
-		
-		private byte _amount_taken;
-		
-		private bool _on_time;
-		
-		private System.Nullable<System.DateTime> _completed_time;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnIdChanging(int value);
-    partial void OnIdChanged();
-    partial void Ondrug_idfkChanging(int value);
-    partial void Ondrug_idfkChanged();
-    partial void Onpatient_idfkChanging(int value);
-    partial void Onpatient_idfkChanged();
-    partial void OntimecodeChanging(string value);
-    partial void OntimecodeChanged();
-    partial void Onamount_takenChanging(byte value);
-    partial void Onamount_takenChanged();
-    partial void Onon_timeChanging(bool value);
-    partial void Onon_timeChanged();
-    partial void Oncompleted_timeChanging(System.Nullable<System.DateTime> value);
-    partial void Oncompleted_timeChanged();
-    #endregion
-		
-		public History()
-		{
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int Id
-		{
-			get
-			{
-				return this._Id;
-			}
-			set
-			{
-				if ((this._Id != value))
-				{
-					this.OnIdChanging(value);
-					this.SendPropertyChanging();
-					this._Id = value;
-					this.SendPropertyChanged("Id");
-					this.OnIdChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_drug_idfk", DbType="Int NOT NULL")]
-		public int drug_idfk
-		{
-			get
-			{
-				return this._drug_idfk;
-			}
-			set
-			{
-				if ((this._drug_idfk != value))
-				{
-					this.Ondrug_idfkChanging(value);
-					this.SendPropertyChanging();
-					this._drug_idfk = value;
-					this.SendPropertyChanged("drug_idfk");
-					this.Ondrug_idfkChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_patient_idfk", DbType="Int NOT NULL")]
-		public int patient_idfk
-		{
-			get
-			{
-				return this._patient_idfk;
-			}
-			set
-			{
-				if ((this._patient_idfk != value))
-				{
-					this.Onpatient_idfkChanging(value);
-					this.SendPropertyChanging();
-					this._patient_idfk = value;
-					this.SendPropertyChanged("patient_idfk");
-					this.Onpatient_idfkChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_timecode", DbType="NVarChar(4)")]
-		public string timecode
-		{
-			get
-			{
-				return this._timecode;
-			}
-			set
-			{
-				if ((this._timecode != value))
-				{
-					this.OntimecodeChanging(value);
-					this.SendPropertyChanging();
-					this._timecode = value;
-					this.SendPropertyChanged("timecode");
-					this.OntimecodeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_amount_taken", DbType="TinyInt NOT NULL")]
-		public byte amount_taken
-		{
-			get
-			{
-				return this._amount_taken;
-			}
-			set
-			{
-				if ((this._amount_taken != value))
-				{
-					this.Onamount_takenChanging(value);
-					this.SendPropertyChanging();
-					this._amount_taken = value;
-					this.SendPropertyChanged("amount_taken");
-					this.Onamount_takenChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_on_time", DbType="Bit NOT NULL")]
-		public bool on_time
-		{
-			get
-			{
-				return this._on_time;
-			}
-			set
-			{
-				if ((this._on_time != value))
-				{
-					this.Onon_timeChanging(value);
-					this.SendPropertyChanging();
-					this._on_time = value;
-					this.SendPropertyChanged("on_time");
-					this.Onon_timeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_completed_time", DbType="DateTime")]
-		public System.Nullable<System.DateTime> completed_time
-		{
-			get
-			{
-				return this._completed_time;
-			}
-			set
-			{
-				if ((this._completed_time != value))
-				{
-					this.Oncompleted_timeChanging(value);
-					this.SendPropertyChanging();
-					this._completed_time = value;
-					this.SendPropertyChanged("completed_time");
-					this.Oncompleted_timeChanged();
 				}
 			}
 		}

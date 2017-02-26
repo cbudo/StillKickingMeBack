@@ -2,76 +2,76 @@
 <ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 12, 12" name="StillKickingDB">
   <DataContextMoniker Name="/StillKickingDBDataContext" />
   <nestedChildShapes>
-    <classShape Id="bc2b17c9-025c-4d0e-90fc-efae027337ca" absoluteBounds="0.75, 0.75, 2, 1.9631982421875">
+    <classShape Id="466a6c38-d20d-4132-9a5f-416adc5f9102" absoluteBounds="0.75, 0.75, 2, 1.9631982421875">
       <DataClassMoniker Name="/StillKickingDBDataContext/Caregiver" />
       <nestedChildShapes>
-        <elementListCompartment Id="27119854-562c-43a4-8099-dc95c124516f" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="f97d34e5-d653-4c17-80c3-f89b24efeb65" absoluteBounds="0.765, 1.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="81acfbe8-78ea-4070-9fd0-4f95084ec07f" absoluteBounds="3.75, 0.75, 2, 2.7324039713541666">
+    <classShape Id="bd8efad3-6dcd-4c28-b86f-140fa2231e66" absoluteBounds="3.75, 0.75, 2, 2.7324039713541666">
       <DataClassMoniker Name="/StillKickingDBDataContext/Patient_Medication_rel" />
       <nestedChildShapes>
-        <elementListCompartment Id="de389bb5-0e1c-493e-8e3a-db3821814003" absoluteBounds="3.765, 1.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="851caca8-6afd-4521-b32e-72d004de50ec" absoluteBounds="3.765, 1.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="25fb1dfe-aeda-435c-8e75-abcc4454613a" absoluteBounds="0.75, 4.75, 2, 1.1939925130208344">
+    <classShape Id="15f18aab-df81-4616-b140-609f4760ff56" absoluteBounds="0.75, 4.75, 2, 1.1939925130208344">
       <DataClassMoniker Name="/StillKickingDBDataContext/ContactType" />
       <nestedChildShapes>
-        <elementListCompartment Id="6c6ded1d-20ac-478b-8f9a-ef21eaf912eb" absoluteBounds="0.765, 5.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="5389efe1-9d47-4919-8793-797009e7419d" absoluteBounds="0.765, 5.21, 1.9700000000000002, 0.63399251302083326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="82c30ab8-006b-47aa-8d96-e9539c4cfcbf" absoluteBounds="3.75, 4.75, 2, 1.7708968098958327">
+    <classShape Id="24fdb638-a945-4cbf-953f-164c0b8ee359" absoluteBounds="3.75, 4.75, 2, 1.7708968098958327">
       <DataClassMoniker Name="/StillKickingDBDataContext/EmergencyContact" />
       <nestedChildShapes>
-        <elementListCompartment Id="3fa3359d-07a7-4d22-acc9-26026aac133b" absoluteBounds="3.765, 5.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="74a22ba0-abfd-4640-ba30-062d56512e02" absoluteBounds="3.765, 5.21, 1.9700000000000002, 1.2108968098958333" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="f8cfb447-3621-420c-8e47-a915be629952" absoluteBounds="6.75, 0.75, 2, 1.5785953776041666">
+    <classShape Id="fec074ed-cf58-49a9-862a-d9a4f22f44e1" absoluteBounds="6.75, 0.75, 2, 1.5785953776041666">
       <DataClassMoniker Name="/StillKickingDBDataContext/Event" />
       <nestedChildShapes>
-        <elementListCompartment Id="be47904a-b8a4-4080-bac7-4338485be7a5" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="bcd80c4c-18bd-449e-a1ca-d3e7c0b17849" absoluteBounds="6.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="9b2effc5-1f53-424a-9785-c13aad93e223" absoluteBounds="6.75, 3.75, 2, 1.3862939453125005">
+    <classShape Id="00051dfa-22b6-4481-86af-90216a26b57d" absoluteBounds="6.75, 3.75, 2, 1.3862939453125005">
       <DataClassMoniker Name="/StillKickingDBDataContext/Event_Type" />
       <nestedChildShapes>
-        <elementListCompartment Id="ec4cc30e-d56b-4dc8-b1fb-6a8bd64fd611" absoluteBounds="6.765, 4.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="82288a2c-38e3-4b3f-a80b-36efb10bff0e" absoluteBounds="6.765, 4.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
-    <classShape Id="4710bcd1-ff99-4755-9f82-e8c82140b795" absoluteBounds="6.75, 6.75, 2, 1.3862939453125005">
-      <DataClassMoniker Name="/StillKickingDBDataContext/Medical_Condition" />
-      <nestedChildShapes>
-        <elementListCompartment Id="7f82f843-e138-4223-8380-aa12dfd1f2c5" absoluteBounds="6.765, 7.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="8c670e63-d821-4ff7-97f7-951ad6ba2483" absoluteBounds="0.75, 7.75, 2, 1.5785953776041666">
-      <DataClassMoniker Name="/StillKickingDBDataContext/MedicalInfo" />
-      <nestedChildShapes>
-        <elementListCompartment Id="909e49c5-7708-4088-9aa0-1147c536d3b4" absoluteBounds="0.765, 8.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="62f990ec-459b-4c4a-9ce6-5145e5d68418" absoluteBounds="9.75, 0.75, 2, 2.7324039713541666">
-      <DataClassMoniker Name="/StillKickingDBDataContext/Medication" />
-      <nestedChildShapes>
-        <elementListCompartment Id="3dbb9176-cad0-4c79-9eac-5c82e0bd3547" absoluteBounds="9.765, 1.21, 1.9700000000000002, 2.1724039713541665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="4e5506ca-b2df-4572-aaa7-b98d610f4df6" absoluteBounds="3.75, 9.75, 2, 1.9631982421874987">
-      <DataClassMoniker Name="/StillKickingDBDataContext/Patient" />
-      <nestedChildShapes>
-        <elementListCompartment Id="c53ea8b9-2351-4c1b-b52c-81197c1e48e1" absoluteBounds="3.765, 10.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="b12e1d1c-96e8-4700-9344-5dae17223573" absoluteBounds="9.75, 4.75, 2, 1.3862939453125005">
-      <DataClassMoniker Name="/StillKickingDBDataContext/Patient_Caregiver_rel" />
-      <nestedChildShapes>
-        <elementListCompartment Id="c29ebdf5-0cb2-4c92-af04-40166c29a4a2" absoluteBounds="9.765, 5.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
-      </nestedChildShapes>
-    </classShape>
-    <classShape Id="0df8b738-6193-48d2-b721-7ccde8ded52e" absoluteBounds="3.625, 4.125, 2, 2.1554996744791666">
+    <classShape Id="68149c51-d608-4018-a3e9-b66e68b91a2e" absoluteBounds="6.75, 6.75, 2, 2.1554996744791666">
       <DataClassMoniker Name="/StillKickingDBDataContext/History" />
       <nestedChildShapes>
-        <elementListCompartment Id="fd05d008-740d-44d5-aafd-c49b6435fa23" absoluteBounds="3.64, 4.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <elementListCompartment Id="ab3ab4c1-894b-4dfd-9ea0-a5447eb2dc8d" absoluteBounds="6.765, 7.21, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="dd4045c4-0e8f-4715-a419-7b9e666539af" absoluteBounds="0.75, 7.75, 2, 1.3862939453124996">
+      <DataClassMoniker Name="/StillKickingDBDataContext/Medical_Condition" />
+      <nestedChildShapes>
+        <elementListCompartment Id="400d57de-03a2-435a-9f28-aadae45d3e2c" absoluteBounds="0.765, 8.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="7faf9862-7294-4d30-a3db-d45c4b1eb57c" absoluteBounds="9.75, 0.75, 2, 1.5785953776041666">
+      <DataClassMoniker Name="/StillKickingDBDataContext/MedicalInfo" />
+      <nestedChildShapes>
+        <elementListCompartment Id="2da6ab2d-b090-4943-8c60-b0f690596e34" absoluteBounds="9.765, 1.21, 1.9700000000000002, 1.0185953776041665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="009beb73-b190-443d-a5b7-8a952a141f49" absoluteBounds="9.75, 3.75, 2, 2.347801106770834">
+      <DataClassMoniker Name="/StillKickingDBDataContext/Medication" />
+      <nestedChildShapes>
+        <elementListCompartment Id="76b790ae-a06c-4d3f-9b84-129c20f48f2d" absoluteBounds="9.765, 4.21, 1.9700000000000002, 1.7878011067708335" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="899756a5-e63f-4547-a0fe-baad6f4a869f" absoluteBounds="3.75, 9.75, 2, 1.9631982421874987">
+      <DataClassMoniker Name="/StillKickingDBDataContext/Patient" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1d4db5d0-ee33-47db-bc18-d612fa096867" absoluteBounds="3.765, 10.21, 1.9700000000000002, 1.4031982421875" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="70e3a5ad-6753-43cb-817b-0d466ab77130" absoluteBounds="6.75, 9.75, 2, 1.3862939453124987">
+      <DataClassMoniker Name="/StillKickingDBDataContext/Patient_Caregiver_rel" />
+      <nestedChildShapes>
+        <elementListCompartment Id="5c82411d-40d1-41aa-93b3-666430772eec" absoluteBounds="6.765, 10.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
   </nestedChildShapes>
