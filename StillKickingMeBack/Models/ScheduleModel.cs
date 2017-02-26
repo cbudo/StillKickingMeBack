@@ -7,12 +7,13 @@ namespace StillKickingMeBack.Models
 {
     public class ScheduleModel
     {
-        public int medId { get; set; }
-        public int toTake { get; set; }
-        public string timeToTake { get; set; }
-        public string weekRepeatCode { get; set; }
-        public DateTime startDate { get; set; }
-        public DateTime endDate { get; set; }
+        public int med_Id { get; set; }
+        public int amount { get; set; }
+        public string time_to_take { get; set; }
+        public string week_repeat_code { get; set; }
+        public DateTime start_date { get; set; }
+        public DateTime end_date { get; set; }
+        public double repeat_interval { get; set; }
         public byte severity { get; set; }
         public bool active { get; set; }
     }

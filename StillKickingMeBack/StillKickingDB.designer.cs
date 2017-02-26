@@ -389,15 +389,17 @@ namespace StillKickingMeBack
 		
 		private System.Nullable<int> _Medication_IDFK;
 		
-		private int _to_take;
+		private System.Nullable<int> _amount;
 		
 		private string _time_to_take;
 		
 		private string _week_repeat_code;
 		
-		private System.DateTime _start_date;
+		private System.Nullable<System.DateTime> _start_date;
 		
 		private System.Nullable<System.DateTime> _end_date;
+		
+		private System.Nullable<double> _repeat_interval;
 		
 		private System.Nullable<byte> _severity;
 		
@@ -413,16 +415,18 @@ namespace StillKickingMeBack
     partial void OnUser_IDFKChanged();
     partial void OnMedication_IDFKChanging(System.Nullable<int> value);
     partial void OnMedication_IDFKChanged();
-    partial void Onto_takeChanging(int value);
-    partial void Onto_takeChanged();
+    partial void OnamountChanging(System.Nullable<int> value);
+    partial void OnamountChanged();
     partial void Ontime_to_takeChanging(string value);
     partial void Ontime_to_takeChanged();
     partial void Onweek_repeat_codeChanging(string value);
     partial void Onweek_repeat_codeChanged();
-    partial void Onstart_dateChanging(System.DateTime value);
+    partial void Onstart_dateChanging(System.Nullable<System.DateTime> value);
     partial void Onstart_dateChanged();
     partial void Onend_dateChanging(System.Nullable<System.DateTime> value);
     partial void Onend_dateChanged();
+    partial void Onrepeat_intervalChanging(System.Nullable<double> value);
+    partial void Onrepeat_intervalChanged();
     partial void OnseverityChanging(System.Nullable<byte> value);
     partial void OnseverityChanged();
     partial void OnactiveChanging(bool value);
@@ -494,22 +498,22 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_to_take", DbType="Int NOT NULL")]
-		public int to_take
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_amount", DbType="Int")]
+		public System.Nullable<int> amount
 		{
 			get
 			{
-				return this._to_take;
+				return this._amount;
 			}
 			set
 			{
-				if ((this._to_take != value))
+				if ((this._amount != value))
 				{
-					this.Onto_takeChanging(value);
+					this.OnamountChanging(value);
 					this.SendPropertyChanging();
-					this._to_take = value;
-					this.SendPropertyChanged("to_take");
-					this.Onto_takeChanged();
+					this._amount = value;
+					this.SendPropertyChanged("amount");
+					this.OnamountChanged();
 				}
 			}
 		}
@@ -554,8 +558,8 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start_date", DbType="DateTime NOT NULL")]
-		public System.DateTime start_date
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_start_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> start_date
 		{
 			get
 			{
@@ -590,6 +594,26 @@ namespace StillKickingMeBack
 					this._end_date = value;
 					this.SendPropertyChanged("end_date");
 					this.Onend_dateChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_repeat_interval", DbType="Float")]
+		public System.Nullable<double> repeat_interval
+		{
+			get
+			{
+				return this._repeat_interval;
+			}
+			set
+			{
+				if ((this._repeat_interval != value))
+				{
+					this.Onrepeat_intervalChanging(value);
+					this.SendPropertyChanging();
+					this._repeat_interval = value;
+					this.SendPropertyChanged("repeat_interval");
+					this.Onrepeat_intervalChanged();
 				}
 			}
 		}
