@@ -44,7 +44,7 @@ namespace StillKickingMeBack.Controllers
 
         [HttpPost]
         [Route("api/patient/medication")]
-        public int? AddMedication(MedicationModel meds)
+        public IEnumerable<Medication> AddMedication(MedicationModel meds)
         {
             var headers = Request.Headers;
             if (headers.Contains("Authorization"))
@@ -61,7 +61,7 @@ namespace StillKickingMeBack.Controllers
                 drugs.notes = meds.notes;
                 db.Medications.InsertOnSubmit(drugs);
                 db.SubmitChanges();
-                return drugs.Id;
+                return db.Medications.Where(p => p.UserIDFK == authCode && p.active);
             }
             return null;
         }
