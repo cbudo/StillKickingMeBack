@@ -13,7 +13,7 @@ namespace StillKickingMeBack.Models
         {
             this.drug_id = id;
             this.name = name;
-            this.amount = pills;
+            this.pillsToTake = pills;
             this.eatWithFood = food;
             this.dosage = dosage;
             this.endDate = end;
@@ -28,7 +28,7 @@ namespace StillKickingMeBack.Models
         }
         public int drug_id { get; set; }
         public string name { get; set; }
-        public int? amount { get; set; }
+        public int? pillsToTake { get; set; }
         public bool eatWithFood { get; set; }
         public string dosage { get; set; }
         public double? repeatHours { get; set; }

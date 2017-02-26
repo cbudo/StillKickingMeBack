@@ -37,19 +37,22 @@ namespace StillKickingMeBack.Controllers
         // POST: api/patient/register
         [HttpPost]
         [Route("patient/register")]
-        public int Create(PatientModel patient)
+        public int? Create(PatientModel patient)
         {
-            JavaScriptSerializer js = new JavaScriptSerializer();
             var db = new StillKickingDBDataContext();
-            var a = new Patient();
-            a.Email = patient.Email;
-            a.Name = patient.Name;
-            a.Password = GetHashedString(patient.Password);
-            a.Sex = patient.Sex;
-            a.DOB = patient.DOB;
-            db.Patients.InsertOnSubmit(a);
-            db.SubmitChanges();
-            return a.Id;
+            if (!db.Patients.Any(p => p.Email == patient.Email))
+            {
+                var a = new Patient();
+                a.Email = patient.Email;
+                a.Name = patient.Name;
+                a.Password = GetHashedString(patient.Password);
+                a.Sex = patient.Sex;
+                a.DOB = patient.DOB;
+                db.Patients.InsertOnSubmit(a);
+                db.SubmitChanges();
+                return a.Id;
+            }
+            return null;
         }
 
         // POST: api/patient/login
@@ -62,6 +65,22 @@ namespace StillKickingMeBack.Controllers
             var patient = db.Patients.Where(m => m.Email == user.username).Where(m => m.Password == hashedPwd).First();
 
             return patient.Id;
+        }
+
+        // POST: api/patient/login
+        [HttpPost]
+        [Route("patient/password/update")]
+        public bool UpdatePassword(UserModel user)
+        {
+            var db = new StillKickingDBDataContext();
+            if (user.password == user.repeat_password)
+            {
+                var hashedPwd = GetHashedString(user.password);
+                var patient = db.Patients.Where(m => m.Email == user.username).Where(m => m.Password == hashedPwd).First();
+
+                return true;
+            }
+            return false;
         }
 
         // GET: api/patient/example@example.com/conditions
