@@ -198,7 +198,9 @@ namespace StillKickingMeBack
 		
 		private string _Notes;
 		
-		private System.Nullable<int> _ContactType_IDFK;
+		private int _ContactType_IDFK;
+		
+		private int _Patient_IDFK;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -212,8 +214,10 @@ namespace StillKickingMeBack
     partial void OnPhoneChanged();
     partial void OnNotesChanging(string value);
     partial void OnNotesChanged();
-    partial void OnContactType_IDFKChanging(System.Nullable<int> value);
+    partial void OnContactType_IDFKChanging(int value);
     partial void OnContactType_IDFKChanged();
+    partial void OnPatient_IDFKChanging(int value);
+    partial void OnPatient_IDFKChanged();
     #endregion
 		
 		public Caregiver()
@@ -301,8 +305,8 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactType_IDFK", DbType="Int")]
-		public System.Nullable<int> ContactType_IDFK
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ContactType_IDFK", DbType="Int NOT NULL")]
+		public int ContactType_IDFK
 		{
 			get
 			{
@@ -317,6 +321,26 @@ namespace StillKickingMeBack
 					this._ContactType_IDFK = value;
 					this.SendPropertyChanged("ContactType_IDFK");
 					this.OnContactType_IDFKChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Patient_IDFK", DbType="Int NOT NULL")]
+		public int Patient_IDFK
+		{
+			get
+			{
+				return this._Patient_IDFK;
+			}
+			set
+			{
+				if ((this._Patient_IDFK != value))
+				{
+					this.OnPatient_IDFKChanging(value);
+					this.SendPropertyChanging();
+					this._Patient_IDFK = value;
+					this.SendPropertyChanged("Patient_IDFK");
+					this.OnPatient_IDFKChanged();
 				}
 			}
 		}
@@ -598,7 +622,7 @@ namespace StillKickingMeBack
 		
 		private string _Description;
 		
-		private System.Nullable<int> _Type_Code;
+		private System.Nullable<int> _Event_Type_IDFK;
 		
     #region Extensibility Method Definitions
     partial void OnLoaded();
@@ -610,8 +634,8 @@ namespace StillKickingMeBack
     partial void OnPatient_IDFKChanged();
     partial void OnDescriptionChanging(string value);
     partial void OnDescriptionChanged();
-    partial void OnType_CodeChanging(System.Nullable<int> value);
-    partial void OnType_CodeChanged();
+    partial void OnEvent_Type_IDFKChanging(System.Nullable<int> value);
+    partial void OnEvent_Type_IDFKChanged();
     #endregion
 		
 		public Event()
@@ -679,22 +703,22 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type_Code", DbType="Int")]
-		public System.Nullable<int> Type_Code
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Event_Type_IDFK", DbType="Int")]
+		public System.Nullable<int> Event_Type_IDFK
 		{
 			get
 			{
-				return this._Type_Code;
+				return this._Event_Type_IDFK;
 			}
 			set
 			{
-				if ((this._Type_Code != value))
+				if ((this._Event_Type_IDFK != value))
 				{
-					this.OnType_CodeChanging(value);
+					this.OnEvent_Type_IDFKChanging(value);
 					this.SendPropertyChanging();
-					this._Type_Code = value;
-					this.SendPropertyChanged("Type_Code");
-					this.OnType_CodeChanged();
+					this._Event_Type_IDFK = value;
+					this.SendPropertyChanged("Event_Type_IDFK");
+					this.OnEvent_Type_IDFKChanged();
 				}
 			}
 		}
