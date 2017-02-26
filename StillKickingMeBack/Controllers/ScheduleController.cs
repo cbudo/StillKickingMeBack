@@ -40,7 +40,7 @@ namespace StillKickingMeBack.Controllers
         }
         [HttpPost]
         [Route("api/Patient/Schedule")]
-        public int? AddSchedule(ScheduleModel model)
+        public IEnumerable<JoinedPatientMeds> AddSchedule(ScheduleModel model)
         {
             var headers = Request.Headers;
             if (headers.Contains("Authorization"))
@@ -65,7 +65,11 @@ namespace StillKickingMeBack.Controllers
                 schedule.week_repeat_code = model.week_repeat_code;
                 db.Patient_Medication_rels.InsertOnSubmit(schedule);
                 db.SubmitChanges();
-                return schedule.Id;
+                var schedules = db.Patient_Medication_rels.Where(m => m.User_IDFK == Convert.ToInt64(headers.GetValues("Authorization").First())).Where(m => m.active);
+                return from s in schedules
+                       join m in db.Medications
+                       on s.Medication_IDFK equals m.Id
+                       select new JoinedPatientMeds(m.Name, s.amount, m.eat_with_food, m.dosage_mg, s.start_date, s.week_repeat_code, s.end_date, s.severity, m.active, m.max_pills, s.repeat_interval, s.time_to_take);
             }
             return null;
         }
