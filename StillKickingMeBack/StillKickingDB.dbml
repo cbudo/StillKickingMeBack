@@ -10,6 +10,20 @@
       <Column Name="Patient_IDFK" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
+  <Table Name="dbo.Patient_Medication_rel" Member="Patient_Medication_rels">
+    <Type Name="Patient_Medication_rel">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="User_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Medication_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="to_take" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="time_to_take" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
+      <Column Name="week_repeat_code" Type="System.String" DbType="NVarChar(7)" CanBeNull="true" />
+      <Column Name="start_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="end_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="severity" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
+      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
   <Table Name="dbo.ContactType" Member="ContactTypes">
     <Type Name="ContactType">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -66,6 +80,7 @@
       <Column Name="repeat_hours" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="repeat_start" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
       <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="maxtimes" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </Type>
   </Table>
   <Table Name="dbo.Patient" Member="Patients">
@@ -83,20 +98,6 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="Caregiver_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Patient_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.Patient_Medication_rel" Member="Patient_Medication_rels">
-    <Type Name="Patient_Medication_rel">
-      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="User_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Medication_IDFK" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="to_take" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="time_to_take" Type="System.String" DbType="NVarChar(4)" CanBeNull="true" />
-      <Column Name="week_repeat_code" Type="System.String" DbType="NVarChar(7)" CanBeNull="true" />
-      <Column Name="start_date" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Column Name="end_date" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="severity" Type="System.Byte" DbType="TinyInt" CanBeNull="true" />
-      <Column Name="active" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </Type>
   </Table>
 </Database>
