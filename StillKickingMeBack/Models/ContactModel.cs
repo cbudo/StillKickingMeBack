@@ -10,5 +10,6 @@ namespace StillKickingMeBack.Models
         public string Name { get; set; }
         public string Notes { get; set; }
         public int ContactType { get; set; }
+        public string phone { get; set; }
     }
 }
