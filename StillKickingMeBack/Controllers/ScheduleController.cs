@@ -22,6 +22,22 @@ namespace StillKickingMeBack.Controllers
             }
             return null;
         }
+        [HttpGet]
+        [Route("api/Patient/ScheduleDrugs")]
+        public IEnumerable<JoinedPatientMeds> GetScheduleWithDrugs()
+        {
+            var headers = Request.Headers;
+            if (headers.Contains("Authorization"))
+            {
+                var db = new StillKickingDBDataContext();
+                var schedules = db.Patient_Medication_rels.Where(m => m.User_IDFK == Convert.ToInt64(headers.GetValues("Authorization").First())).Where(m => m.active);
+                return from s in schedules
+                       join m in db.Medications
+                       on s.Medication_IDFK equals m.Id
+                       select new JoinedPatientMeds(m.Name, s.to_take, m.eat_with_food, m.dosage_mg, m.repeat_hours, m.repeat_start, s.week_repeat_code, s.start_date, s.end_date, s.severity, m.active);
+            }
+            return null;
+        }
         [HttpPost]
         [Route("api/Patient/Schedule")]
         public int? AddSchedule(ScheduleModel model)
@@ -48,4 +64,6 @@ namespace StillKickingMeBack.Controllers
             return null;
         }
     }
+
+    
 }
