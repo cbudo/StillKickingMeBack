@@ -18,7 +18,7 @@ namespace StillKickingMeBack.Controllers
             if (headers.Contains("Authorization"))
             {
                 var db = new StillKickingDBDataContext();
-                return db.Patient_Medication_rels.Where(m => m.User_IDFK == Convert.ToInt64(headers.GetValues("Authorization").First())).Where(m=>m.active);
+                return db.Patient_Medication_rels.Where(m => m.User_IDFK == Convert.ToInt64(headers.GetValues("Authorization").First())).Where(m => m.active);
             }
             return null;
         }
@@ -48,12 +48,19 @@ namespace StillKickingMeBack.Controllers
                 var db = new StillKickingDBDataContext();
                 var schedule = new Patient_Medication_rel();
                 schedule.active = model.active;
-                schedule.end_date = model.end_date;
                 schedule.Medication_IDFK = model.med_Id;
                 schedule.severity = model.severity;
-                schedule.start_date = model.start_date;
+                schedule.amount = model.amount;
+                if (model.start_date >= new DateTime(1753, 1, 1))
+                {
+                    schedule.start_date = model.start_date;
+                }
+                if (model.end_date >= new DateTime(1753,1,1))
+                {
+                    schedule.end_date = model.end_date;
+                }
                 schedule.time_to_take = model.time_to_take;
-                schedule.repeat_interval =  model.repeat_interval;
+                schedule.repeat_interval = model.repeat_interval;
                 schedule.User_IDFK = Convert.ToInt32(headers.GetValues("Authorization").First());
                 schedule.week_repeat_code = model.week_repeat_code;
                 db.Patient_Medication_rels.InsertOnSubmit(schedule);
@@ -64,5 +71,5 @@ namespace StillKickingMeBack.Controllers
         }
     }
 
-    
+
 }
