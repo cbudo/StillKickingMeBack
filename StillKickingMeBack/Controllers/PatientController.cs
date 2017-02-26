@@ -64,6 +64,43 @@ namespace StillKickingMeBack.Controllers
             return patient.Id;
         }
 
+        // GET: api/patient/example@example.com/conditions
+        [HttpGet]
+        [Route("patient/conditions")]
+        public IEnumerable<Medical_Condition> getConditions()
+        {
+            var headers = Request.Headers;
+            if (headers.Contains("Authorization"))
+            {
+                var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
+
+                var db = new StillKickingDBDataContext();
+                var conditions = db.Medical_Conditions.Where(p => p.Patient_IDFK == authCode);
+                return conditions;
+            }
+            return null;
+        }
+
+        // POST: api/patient/example@example.com/conditions
+        [HttpPost]
+        [Route("patient/conditions")]
+        public int? CreateCondition(Medical_Condition condition)
+        {
+            var headers = Request.Headers;
+            if (headers.Contains("Authorization"))
+            {
+                var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
+                var db = new StillKickingDBDataContext();
+                var a = new Medical_Condition();
+                a.Name = condition.Name;
+                a.Patient_IDFK = authCode;
+                db.Medical_Conditions.InsertOnSubmit(a);
+                db.SubmitChanges();
+                return a.Id;
+            }
+            return null;
+        }
+
         //public static string Encrypt(string data)
         //{
         //    TripleDESCryptoServiceProvider DES = new TripleDESCryptoServiceProvider();

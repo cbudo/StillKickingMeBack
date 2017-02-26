@@ -18,7 +18,7 @@ namespace StillKickingMeBack.Controllers
             {
                 var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
                 var db = new StillKickingDBDataContext();
-                return db.Histories.Where(h => h.patient_idfk == authCode && h.completed_time.GetValueOrDefault().Date == DateTime.Now.Date);
+                return db.Histories.Where(h => h.patient_idfk == authCode && h.completed_time.GetValueOrDefault() > DateTime.Now.AddDays(-1));
             }
             return null;
         }
