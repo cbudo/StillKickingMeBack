@@ -208,6 +208,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\JoinedPatientMeds.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MedicationModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
