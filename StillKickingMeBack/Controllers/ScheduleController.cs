@@ -34,7 +34,7 @@ namespace StillKickingMeBack.Controllers
                 return from s in schedules
                        join m in db.Medications
                        on s.Medication_IDFK equals m.Id
-                       select new JoinedPatientMeds(m.Name, s.to_take, m.eat_with_food, m.dosage_mg, m.repeat_hours, m.repeat_start, s.week_repeat_code, s.start_date, s.end_date, s.severity, m.active);
+                       select new JoinedPatientMeds(m.Name, s.to_take, m.eat_with_food, m.dosage_mg, m.repeat_hours, m.repeat_start, s.week_repeat_code, s.start_date, s.end_date, s.severity, m.active, m.maxtimes);
             }
             return null;
         }
