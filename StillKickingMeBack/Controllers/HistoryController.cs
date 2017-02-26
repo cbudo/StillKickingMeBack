@@ -46,6 +46,7 @@ namespace StillKickingMeBack.Controllers
                 var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
                 var db = new StillKickingDBDataContext();
                 model.patient_idfk = authCode;
+                model.completed_time = DateTime.Now;
                 db.Histories.InsertOnSubmit(model);
                 db.SubmitChanges();
                 return model.Id;
