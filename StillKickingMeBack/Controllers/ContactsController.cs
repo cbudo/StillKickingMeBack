@@ -32,7 +32,7 @@ namespace StillKickingMeBack.Controllers
             return null;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("api/patient/contacts")]
         public IEnumerable<Caregiver> GetContacts()
         {
