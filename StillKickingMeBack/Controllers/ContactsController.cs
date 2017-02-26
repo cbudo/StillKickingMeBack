@@ -31,6 +31,21 @@ namespace StillKickingMeBack.Controllers
             }
             return null;
         }
+        [HttpGet]
+        [Route("api/patient/contact/{contactId:int")]
+        public Caregiver AddContact(int contactId)
+        {
+            var headers = Request.Headers;
+            if (headers.Contains("Authorization"))
+            {
+                var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
+                var caregiver = new Caregiver();
+                var db = new StillKickingDBDataContext();
+
+                return db.Caregivers.Where(m=>m.Id == contactId).First();
+            }
+            return null;
+        }
 
         [HttpGet]
         [Route("api/patient/contacts")]
