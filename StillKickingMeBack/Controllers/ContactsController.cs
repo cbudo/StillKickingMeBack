@@ -44,5 +44,25 @@ namespace StillKickingMeBack.Controllers
             }
             return null;
         }
+
+        [HttpGet]
+        [Route("api/contacts/types")]
+        public IEnumerable<ContactType> GetContactTypes()
+        {
+            var db = new StillKickingDBDataContext();
+            return db.ContactTypes;
+        }
+
+        [HttpPost]
+        [Route("api/contacts/type")]
+        public int? AddContactType(ContactType model)
+        {
+            var db = new StillKickingDBDataContext();
+            db.ContactTypes.InsertOnSubmit(model);
+            db.SubmitChanges();
+            
+            return model.Id;
+        }
     }
+
 }
