@@ -12,7 +12,7 @@ namespace StillKickingMeBack.Controllers
     {
         [HttpPost]
         [Route("api/patient/contact")]
-        public int? AddContact(ContactModel model)
+        public IEnumerable<caregiverWithTypes> AddContact(ContactModel model)
         {
             var headers = Request.Headers;
             if (headers.Contains("Authorization"))
@@ -27,7 +27,11 @@ namespace StillKickingMeBack.Controllers
                 caregiver.Phone = model.phone;
                 db.Caregivers.InsertOnSubmit(caregiver);
                 db.SubmitChanges();
-                return caregiver.Id;
+                var caregivers = db.Caregivers.Where(c => c.Patient_IDFK == Convert.ToInt32(headers.GetValues("Authorization").First()));
+                return from c in caregivers
+                       join t in db.ContactTypes
+                       on c.ContactType_IDFK equals t.Id
+                       select new caregiverWithTypes(c.Id, c.Name, c.Phone, c.Notes, c.ContactType_IDFK, c.Patient_IDFK, t.Type);
             }
             return null;
         }
@@ -49,13 +53,17 @@ namespace StillKickingMeBack.Controllers
 
         [HttpGet]
         [Route("api/patient/contacts")]
-        public IEnumerable<Caregiver> GetContacts()
+        public IEnumerable<caregiverWithTypes> GetContacts()
         {
             var headers = Request.Headers;
             if (headers.Contains("Authorization"))
             {
                 var db = new StillKickingDBDataContext();
-                return db.Caregivers.Where(c => c.Patient_IDFK == Convert.ToInt32(headers.GetValues("Authorization").First()));
+                var caregivers = db.Caregivers.Where(c => c.Patient_IDFK == Convert.ToInt32(headers.GetValues("Authorization").First()));
+                return from c in caregivers
+                       join t in db.ContactTypes
+                       on c.ContactType_IDFK equals t.Id
+                       select new caregiverWithTypes(c.Id, c.Name, c.Phone, c.Notes, c.ContactType_IDFK, c.Patient_IDFK, t.Type);
             }
             return null;
         }

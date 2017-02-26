@@ -207,6 +207,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\caregiverWithTypes.cs" />
     <Compile Include="Models\ContactModel.cs" />
     <Compile Include="Models\HistoryObject.cs" />
     <Compile Include="Models\IdentityModels.cs" />

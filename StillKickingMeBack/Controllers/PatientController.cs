@@ -22,7 +22,6 @@ namespace StillKickingMeBack.Controllers
             if (headers.Contains("Authorization"))
             {
                 var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
-                JavaScriptSerializer js = new JavaScriptSerializer();
                 var db = new StillKickingDBDataContext();
                 var patient = db.Patients.Where(p => p.Id == authCode).First();
                 if (patient == null)
@@ -75,10 +74,14 @@ namespace StillKickingMeBack.Controllers
             var db = new StillKickingDBDataContext();
             if (user.password == user.repeat_password)
             {
-                var hashedPwd = GetHashedString(user.password);
-                var patient = db.Patients.Where(m => m.Email == user.username).Where(m => m.Password == hashedPwd).First();
-
-                return true;
+                if (db.Patients.Any(p => p.Password == GetHashedString(user.password)))
+                {
+                    var hashedPwd = GetHashedString(user.password);
+                    var patient = db.Patients.Where(m => m.Email == user.username).Where(m => m.Password == hashedPwd).First();
+                    patient.Password = GetHashedString(user.password);
+                    db.SubmitChanges();
+                    return true;
+                }
             }
             return false;
         }
