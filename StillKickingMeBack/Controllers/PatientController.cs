@@ -10,27 +10,33 @@ using System.Web.Script.Serialization;
 
 namespace StillKickingMeBack.Controllers
 {
-    [RoutePrefix("api/patient")]
+    [RoutePrefix("api")]
     public class PatientController : ApiController
     {
         // GET: api/Patient/example@example.com
         [HttpGet]
-        [Route("{patientId:int}")]
-        public Patient getPatient(int patientId)
+        [Route("patient")]
+        public Patient getPatient()
         {
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            var db = new StillKickingDBDataContext();
-            var patient = db.Patients.Where(p => p.Id == patientId).First();
-            if (patient == null)
+            var headers = Request.Headers;
+            if (headers.Contains("Authorization"))
             {
-                return null;
+                var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
+                JavaScriptSerializer js = new JavaScriptSerializer();
+                var db = new StillKickingDBDataContext();
+                var patient = db.Patients.Where(p => p.Id == authCode).First();
+                if (patient == null)
+                {
+                    return null;
+                }
+                return patient;
             }
-            return patient;
+            return null;
         }
 
         // POST: api/patient/register
         [HttpPost]
-        [Route("register")]
+        [Route("patient/register")]
         public int Create(PatientModel patient)
         {
             JavaScriptSerializer js = new JavaScriptSerializer();
@@ -48,7 +54,7 @@ namespace StillKickingMeBack.Controllers
 
         // POST: api/patient/login
         [HttpPost]
-        [Route("login")]
+        [Route("patient/login")]
         public int Login(UserModel user)
         {
             var db = new StillKickingDBDataContext();

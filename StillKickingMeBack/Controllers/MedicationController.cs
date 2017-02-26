@@ -20,11 +20,17 @@ namespace StillKickingMeBack.Controllers
         }
 
         [HttpGet]
-        [Route("api/patient/{patientId:int}/medications")]
-        public IEnumerable<Medication> GetMedications(int patientId)
+        [Route("api/patient/medications")]
+        public IEnumerable<Medication> GetMedications()
         {
-            var db = new StillKickingDBDataContext();
-            return db.Medications.Where(p=>p.UserIDFK == patientId);
+            var headers = Request.Headers;
+            if (headers.Contains("Authorization"))
+            {
+                var db = new StillKickingDBDataContext();
+                var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
+                return db.Medications.Where(p => p.UserIDFK == authCode);
+            }
+            return null;
         }
 
         [HttpGet]
@@ -33,26 +39,32 @@ namespace StillKickingMeBack.Controllers
         {
             var db = new StillKickingDBDataContext();
 
-            return db.Medications.Where(m=>m.Id == medicationId).First();
+            return db.Medications.Where(m => m.Id == medicationId).First();
         }
 
         [HttpPost]
-        [Route("api/patient/{patientId:int}/medication")]
-        public int AddMedication(int patientId, MedicationModel meds)
+        [Route("api/patient/medication")]
+        public int? AddMedication(MedicationModel meds)
         {
-            Medication drugs = new Medication();
-            drugs.UserIDFK = patientId;
-            drugs.Name = meds.Name;
-            drugs.pills_to_take = meds.pills_to_take;
-            drugs.active = meds.active;
-            drugs.dosage_mg = meds.dosage_mg;
-            drugs.eat_with_food = meds.eat_with_food;
-            drugs.repeat_hours = meds.repeat_hours;
-            drugs.repeat_start = meds.repeat_start;
-            var db = new StillKickingDBDataContext();
-            db.Medications.InsertOnSubmit(drugs);
-            db.SubmitChanges();
-            return drugs.Id;
+            var headers = Request.Headers;
+            if (headers.Contains("Authorization"))
+            {
+                var authCode = Convert.ToInt32(headers.GetValues("Authorization").First());
+                var db = new StillKickingDBDataContext();
+                Medication drugs = new Medication();
+                drugs.UserIDFK = authCode;
+                drugs.Name = meds.Name;
+                drugs.pills_to_take = meds.pills_to_take;
+                drugs.active = meds.active;
+                drugs.dosage_mg = meds.dosage_mg;
+                drugs.eat_with_food = meds.eat_with_food;
+                drugs.repeat_hours = meds.repeat_hours;
+                drugs.repeat_start = meds.repeat_start;
+                db.Medications.InsertOnSubmit(drugs);
+                db.SubmitChanges();
+                return drugs.Id;
+            }
+            return null;
         }
     }
 }
