@@ -68,5 +68,11 @@
         <elementListCompartment Id="c29ebdf5-0cb2-4c92-af04-40166c29a4a2" absoluteBounds="9.765, 5.21, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </classShape>
+    <classShape Id="0df8b738-6193-48d2-b721-7ccde8ded52e" absoluteBounds="3.625, 4.125, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/StillKickingDBDataContext/History" />
+      <nestedChildShapes>
+        <elementListCompartment Id="fd05d008-740d-44d5-aafd-c49b6435fa23" absoluteBounds="3.64, 4.585, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
   </nestedChildShapes>
 </ordesignerObjectsDiagram>
