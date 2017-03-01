@@ -22,7 +22,7 @@ namespace StillKickingMeBack
 	using System;
 	
 	
-	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="StillKickingMe_db")]
+	[global::System.Data.Linq.Mapping.DatabaseAttribute(Name="StillKickingMe_db_Dev")]
 	public partial class StillKickingDBDataContext : System.Data.Linq.DataContext
 	{
 		
@@ -724,7 +724,7 @@ namespace StillKickingMeBack
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NChar(150)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Type", DbType="NVarChar(50)")]
 		public string Type
 		{
 			get
